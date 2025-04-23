@@ -1,15 +1,17 @@
 import Image from "next/image";
-import { Input, Flex, Button, Center, Text } from '@chakra-ui/react'
 import Head from "next/head";
 import logoImg from "../../../public/images/logo.png"
 import Link from "next/link";
+import { Input, Flex, Button, Center, Text } from '@chakra-ui/react'
 import { useState } from "react";
 
-export default function Login() {
+export default function Register() {
+  const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleLogin() {
+  function handleRegister() {
+    console.log(nome)
     console.log(email)
     console.log(password)
   }
@@ -17,7 +19,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>BarberShop - Faca login para acessar</title>
+        <title>BarberShop - Crie sua conta no BarberShop</title>
       </Head>
       <Flex background={"barber.900"} height={"100vh"} align={"center"} justifyContent={"center"}>
         <Flex width={640} direction={"column"} p={14} rounded={8}>
@@ -31,13 +33,25 @@ export default function Login() {
             />
           </Center>
 
+
+          <Input background={"barber.100"}
+            variant={"filled"}
+            size={"lg"}
+            placeholder="Nome da barbearia"
+            type="text"
+            mb={3}
+            mt={3}
+            _placeholder={{ color: 'button.cta' }}
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+
           <Input background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="email@email.com"
             type="email"
             mb={3}
-            mt={3}
             _placeholder={{ color: 'button.cta' }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -60,14 +74,14 @@ export default function Login() {
             color={"button.default"}
             size={"lg"}
             _hover={{ bg: "#4E342E" }}
-            onClick={handleLogin}
+            onClick={handleRegister}
           >
-            Acessar
+            Cadastrar
           </Button>
 
           <Center mt={2}>
-            <Link href={"/register"}>
-              <Text cursor={"pointer"} > Ainda nao tem conta? <strong>Cadastre-se</strong></Text>
+            <Link href={"/login"}>
+              <Text cursor={"pointer"} > Já possui uma conta? <strong>Faca login</strong></Text>
             </Link>
           </Center>
         </Flex>
