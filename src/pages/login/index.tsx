@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Input, Flex, Text, Center } from '@chakra-ui/react'
+import { Input, Flex, Button, Center, Text } from '@chakra-ui/react'
 import Head from "next/head";
 import logoImg from "../../../public/images/logo.png"
-
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -16,6 +16,7 @@ export default function Login() {
             <Image
               src={logoImg}
               quality={100}
+              width={340}
               objectFit="fill"
               alt="Logo BaberShop"
             />
@@ -27,6 +28,7 @@ export default function Login() {
             placeholder="email@email.com"
             type="email"
             mb={3}
+            mt={3}
             _placeholder={{ color: 'button.cta' }}
           />
 
@@ -39,7 +41,21 @@ export default function Login() {
             mb={6}
             _placeholder={{ color: 'barber.50' }}
           />
+          <Button
+            background={"button.cta"}
+            mb={6}
+            color={"button.default"}
+            size={"lg"}
+            _hover={{ bg: "#4E342E" }}
+          >
+            Acessar
+          </Button>
 
+          <Center mt={2}>
+            <Link href={"/register"}>
+              <Text cursor={"pointer"} > Ainda nao tem conta? <strong>Cadastre-se</strong></Text>
+            </Link>
+          </Center>
         </Flex>
       </Flex>
     </>
