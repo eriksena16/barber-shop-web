@@ -21,7 +21,7 @@ export default function Register() {
       <Head>
         <title>BarberShop - Crie sua conta no BarberShop</title>
       </Head>
-      <Flex background={"barber.900"} height={"100vh"} align={"center"} justifyContent={"center"}>
+      <Flex background={"barber.900"} height={"100dvh"} align={"center"} justifyContent={"center"}>
         <Flex width={640} direction={"column"} p={14} rounded={8}>
           <Center p={4}>
             <Image
