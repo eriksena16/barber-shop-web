@@ -53,7 +53,7 @@ export default function Login() {
             variant={"filled"}
             size={"lg"}
             placeholder="*********"
-            type="text"
+            type="password"
             mb={6}
             _placeholder={{ color: 'barber.50' }}
             value={password}
@@ -72,7 +72,7 @@ export default function Login() {
 
           <Center mt={2}>
             <Link href={"/register"}>
-              <Text cursor={"pointer"} > Ainda nao tem conta? <strong>Cadastre-se</strong></Text>
+              <Text cursor={"pointer"} color={"barber.100"} > Ainda nao tem conta? <strong>Cadastre-se</strong></Text>
             </Link>
           </Center>
         </Flex>

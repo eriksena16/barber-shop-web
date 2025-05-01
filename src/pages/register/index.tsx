@@ -3,17 +3,27 @@ import Head from "next/head";
 import logoImg from "../../../public/images/logo.png"
 import Link from "next/link";
 import { Input, Flex, Button, Center, Text } from '@chakra-ui/react'
-import { useState } from "react";
+import { useContext, useState } from "react";
+import {AuthContex} from "../../context/AuthContext"
 
 export default function Register() {
-  const [nome, setNome] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
 
-  function handleRegister() {
-    console.log(nome)
-    console.log(email)
-    console.log(password)
+  const {signUp} = useContext(AuthContex);
+
+  async function handleRegister() {
+    if(name === '' && email === '' && password === '' && address === ''){
+      return;
+    }
+    await signUp({  
+      name,
+      email,
+      password, 
+      address})
+    
   }
 
   return (
@@ -42,8 +52,8 @@ export default function Register() {
             mb={3}
             mt={3}
             _placeholder={{ color: 'button.cta' }}
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <Input background={"barber.100"}
@@ -57,12 +67,22 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
+          <Input background={"barber.100"}  
+            variant={"filled"}
+            size={"lg"}
+            placeholder="endereço"
+            type="texte"
+            mb={3}
+            _placeholder={{ color: 'button.cta' }}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
 
           <Input background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="*********"
-            type="text"
+            type="password"
             mb={6}
             _placeholder={{ color: 'barber.50' }}
             value={password}
@@ -81,7 +101,7 @@ export default function Register() {
 
           <Center mt={2}>
             <Link href={"/login"}>
-              <Text cursor={"pointer"} > Já possui uma conta? <strong>Faca login</strong></Text>
+              <Text cursor={"pointer"} color={"barber.100"} > Já possui uma conta? <strong>Faca login</strong></Text>
             </Link>
           </Center>
         </Flex>

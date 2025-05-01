@@ -8,6 +8,7 @@ interface AuthContexData {
     user: UserProps;
     isAuthenticated: boolean;
     signIn: (credentials: SignInProps) => Promise<void>
+    signUp: (credentials : SignUpProps) => Promise<void>
 }
 
 interface UserProps {
@@ -30,19 +31,26 @@ interface LoginResponse {
 }
 
 type AuthProviderProps = {
-    children: ReactNode
-}
+    children: ReactNode;
+};
 
 interface SignInProps {
     email: string;
     password: string;
-}
+};
 
 type ApiResponse<T> = {
     success: boolean;
     data?: T;
     errors?: string[];
 };
+
+interface SignUpProps{
+    name: string;
+    email: string;
+    password: string;
+    address: string;
+}
 
 function handleApiResponse<T>(response: { data: ApiResponse<T> }) {
     if (!response.data.success) {
@@ -101,8 +109,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
             console.log("Error ao logar", err)
         }
     }
+
+    async function signUp({name, email, password, address} : SignUpProps)  {
+        try{
+
+            const response: boolean = await api.post('/api/v1/Auth/register', {
+                name,
+                email, 
+                password,
+                address
+            });
+
+                Router.push("/login")
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     return (
-        <AuthContex.Provider value={{ user, isAuthenticated, signIn }}>
+        <AuthContex.Provider value={{ user, isAuthenticated, signIn, signUp}}>
             {children}
         </AuthContex.Provider>
     )
