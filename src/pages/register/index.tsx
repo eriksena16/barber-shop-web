@@ -1,29 +1,29 @@
 import Image from "next/image";
 import Head from "next/head";
-import logoImg from "../../../public/images/logo.png"
+import logoImg from "../../../public/images/logo.png";
 import Link from "next/link";
-import { Input, Flex, Button, Center, Text } from '@chakra-ui/react'
-import { useContext, useState } from "react";
-import {AuthContex} from "../../context/AuthContext"
+import { Input, Flex, Button, Center, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [address, setAddress] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
 
-  const {signUp} = useContext(AuthContex);
+  const { signUp } = useAuth();
 
   async function handleRegister() {
-    if(name === '' && email === '' && password === '' && address === ''){
+    if (name === "" && email === "" && password === "" && address === "") {
       return;
     }
-    await signUp({  
+    await signUp({
       name,
       email,
-      password, 
-      address})
-    
+      password,
+      address,
+    });
   }
 
   return (
@@ -31,7 +31,12 @@ export default function Register() {
       <Head>
         <title>BarberShop - Crie sua conta no BarberShop</title>
       </Head>
-      <Flex background={"barber.900"} height={"100dvh"} align={"center"} justifyContent={"center"}>
+      <Flex
+        background={"barber.900"}
+        height={"100dvh"}
+        align={"center"}
+        justifyContent={"center"}
+      >
         <Flex width={640} direction={"column"} p={14} rounded={8}>
           <Center p={4}>
             <Image
@@ -43,48 +48,51 @@ export default function Register() {
             />
           </Center>
 
-
-          <Input background={"barber.100"}
+          <Input
+            background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="Nome da barbearia"
             type="text"
             mb={3}
             mt={3}
-            _placeholder={{ color: 'button.cta' }}
+            _placeholder={{ color: "button.cta" }}
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
-          <Input background={"barber.100"}
+          <Input
+            background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="email@email.com"
             type="email"
             mb={3}
-            _placeholder={{ color: 'button.cta' }}
+            _placeholder={{ color: "button.cta" }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <Input background={"barber.100"}  
+          <Input
+            background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="endereço"
             type="texte"
             mb={3}
-            _placeholder={{ color: 'button.cta' }}
+            _placeholder={{ color: "button.cta" }}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <Input background={"barber.100"}
+          <Input
+            background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="*********"
             type="password"
             mb={6}
-            _placeholder={{ color: 'barber.50' }}
+            _placeholder={{ color: "barber.50" }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -101,7 +109,10 @@ export default function Register() {
 
           <Center mt={2}>
             <Link href={"/login"}>
-              <Text cursor={"pointer"} color={"barber.100"} > Já possui uma conta? <strong>Faca login</strong></Text>
+              <Text cursor={"pointer"} color={"barber.100"}>
+                {" "}
+                Já possui uma conta? <strong>Faca login</strong>
+              </Text>
             </Link>
           </Center>
         </Flex>

@@ -2,134 +2,68 @@ import { createContext, ReactNode, useState } from "react";
 import { destroyCookie, setCookie } from "nookies";
 import Router from "next/router";
 import { api } from "@/services/apiClient";
-
+import { UserProps, SignInProps, SignUpProps } from "../types/AuthTypes";
+import * as authService from "../services/AuthServices";
 
 interface AuthContexData {
-    user: UserProps;
-    isAuthenticated: boolean;
-    signIn: (credentials: SignInProps) => Promise<void>
-    signUp: (credentials : SignUpProps) => Promise<void>
+  user: UserProps;
+  isAuthenticated: boolean;
+  signIn: (credentials: SignInProps) => Promise<void>;
+  signUp: (credentials: SignUpProps) => Promise<void>;
 }
 
-interface UserProps {
-    id: string;
-    name: string;
-    email: string;
-    address: string;
-    subscriptions?: SubscriptionProps[];
-
-}
-
-interface SubscriptionProps {
-    id: string;
-    status: string;
-}
-
-interface LoginResponse {
-    accessToken: string;
-    user: UserProps;
-}
-
-type AuthProviderProps = {
-    children: ReactNode;
+export type AuthProviderProps = {
+  children: ReactNode;
 };
 
-interface SignInProps {
-    email: string;
-    password: string;
-};
-
-type ApiResponse<T> = {
-    success: boolean;
-    data?: T;
-    errors?: string[];
-};
-
-interface SignUpProps{
-    name: string;
-    email: string;
-    password: string;
-    address: string;
-}
-
-function handleApiResponse<T>(response: { data: ApiResponse<T> }) {
-    if (!response.data.success) {
-        throw new Error(response.data.errors?.join(', ') || 'Unknown error');
-    }
-    return response.data.data as T;
-}
-
-export const AuthContex = createContext({} as AuthContexData)
+export const AuthContex = createContext({} as AuthContexData);
 
 export function signOut() {
-    console.log("Error Logount");
-    try {
-        destroyCookie(null, '@barber.token', { path: '/' })
-        Router.push('/login');
-    } catch (err) {
-        console.log("Error ao sair");
-    }
+  try {
+    destroyCookie(null, "@barber.token", { path: "/" });
+    Router.push("/login");
+  } catch (err) {
+    console.log("Error ao sair");
+  }
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<UserProps>()
-    const isAuthenticated = !!user
+  const [user, setUser] = useState<UserProps>();
+  const isAuthenticated = !!user;
 
-    async function signIn({ email, password }: SignInProps) {
-        try {
-            const response = await api.post('/api/v1/Auth/login', {
-                email,
-                password
-            })
+  async function signIn(credentials: SignInProps) {
+    try {
+      const response = await authService.login(credentials);
 
-            console.log("response", response.data);
+      const { accessToken, user } = response;
+      const { id, name, email, address, subscriptions } = user;
 
-            const data = handleApiResponse<LoginResponse>(response);
-            const { accessToken, user } = data;
-            const { id, name, address, subscriptions } = user;
-            setCookie(undefined, '@barber.token', accessToken, {
-                maxAge: 60 * 60 * 3, // 3 horas
-                path: '/'
-            })
+      setCookie(undefined, "@barber.token", accessToken, {
+        maxAge: 60 * 60 * 24,
+        path: "/",
+      });
 
-            setUser({
-                id,
-                name,
-                email,
-                address,
-                subscriptions
-            })
-
-            api.defaults.headers['Authorization'] = `Bearer ${accessToken}`
-
-            Router.push('/dashboard')
-
-
-        } catch (err) {
-            console.log("Error ao logar", err)
-        }
+      setUser(user);
+      api.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
+      Router.push("/dashboard");
+    } catch (err) {
+      console.log("Error ao logar", err);
     }
+  }
 
-    async function signUp({name, email, password, address} : SignUpProps)  {
-        try{
+  async function signUp(credentials: SignUpProps) {
+    try {
+      await authService.register(credentials);
+      Router.push("/login");
 
-            const response: boolean = await api.post('/api/v1/Auth/register', {
-                name,
-                email, 
-                password,
-                address
-            });
-
-                Router.push("/login")
-
-        }catch(err){
-            console.log(err);
-        }
+    } catch (err) {
+      console.log("Erro ao cadastrar: ", err);
     }
+  }
 
-    return (
-        <AuthContex.Provider value={{ user, isAuthenticated, signIn, signUp}}>
-            {children}
-        </AuthContex.Provider>
-    )
+  return (
+    <AuthContex.Provider value={{ user, isAuthenticated, signIn, signUp }}>
+      {children}
+    </AuthContex.Provider>
+  );
 }
