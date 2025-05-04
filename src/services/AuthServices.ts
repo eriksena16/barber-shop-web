@@ -3,8 +3,8 @@ import {
   SignUpProps,
   LoginResponse,
   ApiResponse,
-} from "../types/AuthTypes";
-import { api } from "../services/apiClient";
+} from "@/types/AuthTypes";
+import { api } from "@/services/apiClient";
 
 import {LOGIN_USER, POST_USER} from "../routes/routes"
 

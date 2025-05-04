@@ -2,8 +2,8 @@ import { createContext, ReactNode, useState } from "react";
 import { destroyCookie, setCookie } from "nookies";
 import Router from "next/router";
 import { api } from "@/services/apiClient";
-import { UserProps, SignInProps, SignUpProps } from "../types/AuthTypes";
-import * as authService from "../services/AuthServices";
+import { UserProps, SignInProps, SignUpProps } from "@/types/AuthTypes";
+import * as authService from "@/services/AuthServices";
 
 interface AuthContexData {
   user: UserProps;
@@ -36,7 +36,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const response = await authService.login(credentials);
 
       const { accessToken, user } = response;
-      const { id, name, email, address, subscriptions } = user;
 
       setCookie(undefined, "@barber.token", accessToken, {
         maxAge: 60 * 60 * 24,
