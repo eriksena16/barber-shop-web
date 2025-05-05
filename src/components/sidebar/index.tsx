@@ -34,7 +34,7 @@ const LinkItems: Array<LinkItemProps> = [
 export function SideBar({ children }: { children: ReactNode }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-        <Box minH={"100vh"} bg={"barber.900"}>
+        <Box minH={"100vh"} bg={"barber.100"}>
             <SideBarContent
                 onClose={() => onClose}
                 display={{ base: 'none', md: 'block' }}
@@ -63,9 +63,9 @@ export function SideBar({ children }: { children: ReactNode }) {
 const SideBarContent = ({ onClose, ...rest }: SideBarProps) => {
     return (
         <Box
-            bg={"barber.400"}
+            bg={"barber.900"}
             borderRight={"1px"}
-            borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+            borderRightColor={useColorModeValue('gray.100', 'gray.700')}
             w={{ base: 'full', md: 60 }}
             pos={"fixed"}
             h={"full"}
@@ -100,9 +100,10 @@ const NavItem = ({ icon, children, route, ...rest }: NavItemProps) => {
                 borderRadius={"lg"}
                 role="group"
                 cursor={"pointer"}
+                textColor={"button.default"}
                 _hover={{
-                    bg: "barber.100",
-                    color: 'button.cta'
+                    bg: "barber.50",
+                    color: 'button.default'
                 }}
                 {...rest}
             >
@@ -113,7 +114,7 @@ const NavItem = ({ icon, children, route, ...rest }: NavItemProps) => {
                         fontSize={"16"}
                         as={icon}
                         _groupHover={{
-                            color: 'button.cta'
+                            color: 'button.default'
                         }}
                     />
                 )}

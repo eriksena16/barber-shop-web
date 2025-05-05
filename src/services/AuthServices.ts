@@ -15,7 +15,6 @@ export function handleApiResponse<T>(response: { data: ApiResponse<T> }) {
   return response.data.data as T;
 }
 
-
 export async function  login(credentials: SignInProps): Promise<LoginResponse> {
     const response = await api.post(LOGIN_USER, credentials);
     return handleApiResponse<LoginResponse>(response);

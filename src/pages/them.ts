@@ -9,7 +9,8 @@ const colors = {
     barber: {
         900: " #333333",
         400: " #4E342E",
-        100: " #E3D1B2",
+        150: " #E3D1B2",
+        100: " #F5EEE2",
         50: " #556B2F",
     },
     button: { 
@@ -19,9 +20,27 @@ const colors = {
         danger: " #FF4040",
     },
     green: {
-        900: "#556B2F",
+        900: " #556B2F",
     },
 }
+
+// const colors2 = {
+//     barber: {
+//         900 : {value : " #333333"},
+//         400 : {value : " #4E342E"},
+//         100 : {value : " #E3D1B2"},
+//         50  : {value : " #556B2F"}
+//     }, 
+//     button: {
+//         cta : {value : " #556B2F"},
+//         default : {value : " #E3D1B2"},
+//         darkGray: {value : " #333333"},  
+//         danger : {value : " #FF4040"}
+//     },
+//     green:{
+//         900 : {value : " #556B2F"}
+//     }
+// }
 
 const theme = extendTheme({ colors })
 

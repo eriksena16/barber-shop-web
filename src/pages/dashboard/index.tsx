@@ -9,7 +9,7 @@ export default function Dashboard() {
                 <title>BarberShop - Dashboard</title>
             </Head>
             <SideBar>
-                <Flex background={"barber.900"} height={"100vh"} align={"center"} justifyContent={"center"}>
+                <Flex background={"barber.100"} height={"100vh"} align={"center"} justifyContent={"center"}>
                     <Text color={"button.cta"} fontSize={30}>Dashboard</Text>
                 </Flex>
             </SideBar>
