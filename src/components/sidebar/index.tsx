@@ -26,8 +26,8 @@ import { p } from "framer-motion/client";
 import { link } from "fs";
 
 const LinkItems: Array<LinkItemProps> = [
-    { name: 'Agenda', icon: FiScissors, route: '/dashboard' },
-    { name: 'Cortes', icon: FiClipboard, route: '/haircuts' },
+    { name: 'Agenda', icon: FiClipboard, route: '/dashboard' },
+    { name: 'Cortes', icon: FiScissors, route: '/haircuts' },
     { name: 'Minha Conta', icon: FiSettings, route: '/profile' }
 ]
 

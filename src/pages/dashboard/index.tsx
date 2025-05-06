@@ -1,19 +1,32 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text } from "@chakra-ui/react";
 import Head from "next/head";
-import { SideBar } from '@/components/sidebar';
+import { SideBar } from "@/components/sidebar";
+import { canSSRAuth } from "@/utils/CanSSRAuth";
 
 export default function Dashboard() {
-    return (
-        <>
-            <Head>
-                <title>BarberShop - Dashboard</title>
-            </Head>
-            <SideBar>
-                <Flex background={"barber.100"} height={"100vh"} align={"center"} justifyContent={"center"}>
-                    <Text color={"button.cta"} fontSize={30}>Dashboard</Text>
-                </Flex>
-            </SideBar>
-
-        </>
-    );
+  return (
+    <>
+      <Head>
+        <title>BarberShop - Dashboard</title>
+      </Head>
+      <SideBar>
+        <Flex
+          background={"barber.100"}
+          height={"100vh"}
+          align={"center"}
+          justifyContent={"center"}
+        >
+          <Text color={"button.cta"} fontSize={30}>
+            Dashboard
+          </Text>
+        </Flex>
+      </SideBar>
+    </>
+  );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {},
+  };
+});

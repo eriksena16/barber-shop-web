@@ -1,22 +1,23 @@
 import Image from "next/image";
-import { Input, Flex, Button, Center, Text } from '@chakra-ui/react'
+import { Input, Flex, Button, Center, Text } from "@chakra-ui/react";
 import Head from "next/head";
-import logoImg from "../../../public/images/logo.png"
+import logoImg from "../../../public/images/logo.png";
 import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { canSSRGuest } from "@/utils/CanSSRGuest";
 
 export default function Login() {
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   async function handleLogin() {
     await signIn({
       email,
       password,
-    })
+    });
   }
 
   return (
@@ -24,7 +25,12 @@ export default function Login() {
       <Head>
         <title>BarberShop - Faca login para acessar</title>
       </Head>
-      <Flex background={"barber.900"} height={"100vh"} align={"center"} justifyContent={"center"}>
+      <Flex
+        background={"barber.900"}
+        height={"100vh"}
+        align={"center"}
+        justifyContent={"center"}
+      >
         <Flex width={640} direction={"column"} p={14} rounded={8}>
           <Center p={4}>
             <Image
@@ -36,26 +42,27 @@ export default function Login() {
             />
           </Center>
 
-          <Input background={"barber.100"}
+          <Input
+            background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="email@email.com"
             type="email"
             mb={3}
             mt={3}
-            _placeholder={{ color: 'button.cta' }}
+            _placeholder={{ color: "button.cta" }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-
-          <Input background={"barber.100"}
+          <Input
+            background={"barber.100"}
             variant={"filled"}
             size={"lg"}
             placeholder="*********"
             type="password"
             mb={6}
-            _placeholder={{ color: 'barber.50' }}
+            _placeholder={{ color: "barber.50" }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -72,7 +79,10 @@ export default function Login() {
 
           <Center mt={2}>
             <Link href={"/register"}>
-              <Text cursor={"pointer"} color={"barber.100"} > Ainda nao tem conta? <strong>Cadastre-se</strong></Text>
+              <Text cursor={"pointer"} color={"barber.100"}>
+                {" "}
+                Ainda nao tem conta? <strong>Cadastre-se</strong>
+              </Text>
             </Link>
           </Center>
         </Flex>
@@ -80,3 +90,9 @@ export default function Login() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});

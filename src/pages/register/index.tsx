@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Input, Flex, Button, Center, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { canSSRGuest } from "@/utils/CanSSRGuest";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -120,3 +121,9 @@ export default function Register() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});

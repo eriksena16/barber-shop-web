@@ -1,9 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
-import { destroyCookie, setCookie } from "nookies";
+import { createContext, ReactNode, useState, useEffect } from "react";
+import { destroyCookie, setCookie, parseCookies } from "nookies";
 import Router from "next/router";
 import { api } from "@/services/apiClient";
 import { UserProps, SignInProps, SignUpProps } from "@/types/AuthTypes";
 import * as authService from "@/services/AuthServices";
+import { getUserData } from "@/services/AuthServices";
 
 interface AuthContexData {
   user: UserProps;
@@ -30,7 +31,22 @@ export function signOut() {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user;
+  useEffect(() => {
+    const { "@barber.token": token } = parseCookies();
 
+    if (token) {
+      const fetchUser = async () => {
+        try {
+          const data = await getUserData();
+          setUser(data);
+        } catch (err) {
+          signOut();
+        }
+      };
+
+      fetchUser();
+    }
+  }, []);
   async function signIn(credentials: SignInProps) {
     try {
       const response = await authService.login(credentials);
@@ -54,7 +70,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await authService.register(credentials);
       Router.push("/login");
-
     } catch (err) {
       console.log("Erro ao cadastrar: ", err);
     }
