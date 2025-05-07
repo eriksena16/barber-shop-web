@@ -10,13 +10,12 @@ export default function Profile() {
       </Head>
       <SideBar>
         <Flex
-          background={"barber.900"}
+          background={"barber.100"}
           height={"100vh"}
           align={"center"}
           justifyContent={"center"}
-          backgroundColor={"barber.100"}
         >
-          <Text> Perfil</Text>
+          <Text color={"button.cta"} fontSize={30}> Perfil</Text>
         </Flex>
       </SideBar>
     </>
