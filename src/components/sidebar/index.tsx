@@ -134,9 +134,9 @@ const MobileView = ({ onOpen, ...rest }: MobileProps) => {
             px={{ base: 4, md: 24 }}
             height="20"
             alignItems="center"
-            bg={useColorModeValue('white', 'barber.400')}
+            bg={useColorModeValue('white', 'barber.900')}
             borderBottomWidth="1px"
-            borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+            borderBottomColor={useColorModeValue('gray.100', 'gray.700')}
             justifyContent={"flex-start"}
             {...rest}
         >
