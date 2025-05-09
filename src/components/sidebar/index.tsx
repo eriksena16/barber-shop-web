@@ -27,7 +27,7 @@ import { link } from "fs";
 
 const LinkItems: Array<LinkItemProps> = [
     { name: 'Agenda', icon: FiClipboard, route: '/dashboard' },
-    { name: 'Cortes', icon: FiScissors, route: '/haircut' },
+    { name: 'Cortes', icon: FiScissors, route: '/haircuts' },
     { name: 'Minha Conta', icon: FiSettings, route: '/profile' }
 ]
 
