@@ -17,7 +17,8 @@ export default function NewHaircut() {
           alignItems={"flex-start"}
           justifyContent={"flex-start"}
         >
-          <Flex direction={isMobile ? "column" : "row"}
+          <Flex
+            direction={isMobile ? "column" : "row"}
             w={"100%"}
             align={isMobile ? "flex-start" : "center"}
             mb={isMobile ? 4 : 0}
@@ -25,15 +26,15 @@ export default function NewHaircut() {
             <Link href={"/haircuts"}>
               <Button
                 background={"button.cta"}
-                color={"barber.100"}
+                color={"barber.800"}
                 p={4}
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"center"}
-                _hover={{ bg: "#4E342E" }}
+                _hover={{ bg: " #2C3E50", color: " #F5EEE2" }}
                 mr={4}
               >
-                <FiChevronLeft size={24} color={"barber.50"} />
+                <FiChevronLeft size={24} color={"barber.100"} />
                 Voltar
               </Button>
             </Link>
@@ -42,14 +43,15 @@ export default function NewHaircut() {
               mt={4}
               mb={4}
               mr={4}
-              color={"barber.50"}
+              color={"barber.800"}
             >
               Modelos de Corte
             </Heading>
           </Flex>
           <Flex
             maxW={"700px"}
-            bg={"barber.900"}
+            bg={"barber.800"}
+            rounded={5}
             w={"100%"}
             alignItems={"center"}
             justify={"center"}
@@ -57,14 +59,20 @@ export default function NewHaircut() {
             pb={8}
             direction={"column"}
           >
-            <Heading fontSize={isMobile ? "22px" : "3xl"} mb={4} color={"barber.100"}>Modelos de Corte</Heading>
+            <Heading
+              fontSize={isMobile ? "22px" : "3xl"}
+              mb={4}
+              color={"barber.100"}
+            >
+              Modelos de Corte
+            </Heading>
 
             <Input
               placeholder="Nome do Corte"
               size={"lg"}
               type="text"
               w={"85%"}
-              bg={"gray.900"}
+              bg="barber.600"
               mb={4}
             />
             <Input
@@ -73,18 +81,20 @@ export default function NewHaircut() {
               type="text"
               w={"85%"}
               mb={4}
-              bg={"gray.900"}
+              bg="barber.600"
             />
-             <Button
-                background={"button.cta"}
-                color={"barber.100"}
-                w={"85%"}
-                size={"lg"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                _hover={{ bg: "#4E342E" }}
-                mb={6}
-              >Cadastrar</Button>
+            <Button
+              background={"button.default"}
+              color={"barber.100"}
+              w={"85%"}
+              size={"lg"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              _hover={{ bg: " #B22222" }}
+              mb={6}
+            >
+              Cadastrar
+            </Button>
           </Flex>
         </Flex>
       </SideBar>

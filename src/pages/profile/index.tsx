@@ -2,9 +2,27 @@ import Head from "next/head";
 import { Input, Flex, Heading, Box, Text, Button } from "@chakra-ui/react";
 import { SideBar } from "@/components/sidebar";
 import Link from "next/link";
+import { FaUser } from "react-icons/fa";
+import { canSSRAuth } from "@/utils/CanSSRAuth";
+import { useAuth } from "@/hooks/useAuth";
+import { signOut } from "@/context/AuthContext";
+import { getUserData } from "../../services/AuthServices";
+import { useState } from "react";
+import { setupAPIClient } from "@/services/api";
+import { UserProps } from "@/types/AuthTypes";
 
+type ProfileProps ={
+  userData: UserProps;
+}
 
-export default function Profile() {
+export default function Profile({userData} : ProfileProps) {
+  const { signUp } = useAuth();
+
+  const [name, setName] = useState(userData && userData?.name);
+  const [endereco, setEndereco] = useState(userData && userData?.address);
+  async function logout() {
+    signOut();
+  }
   return (
     <>
       <Head>
@@ -23,13 +41,15 @@ export default function Profile() {
             alignItems="center"
             justifyContent="flex-start"
           >
+            <FaUser size={50} color={" #2C3E50"}></FaUser>
             <Heading
               fontSize="4xl"
               fontFamily="inherit"
+              marginLeft={4}
               marginTop={4}
               marginRight={4}
               marginBottom={4}
-              color={"barber.400"}
+              color={"barber.800"}
             >
               Minha Conta
             </Heading>
@@ -37,7 +57,9 @@ export default function Profile() {
 
           <Flex
             maxWidth="700px"
-            background="barber.50"
+            background="barber.100"
+            border="4px"
+            borderColor="barber.800"
             width="100%"
             direction="column"
             alignItems="center"
@@ -55,16 +77,25 @@ export default function Profile() {
                 fontSize="2xl"
                 fontWeight="bold"
                 fontFamily="inherit"
-                color="barber.100"
+                color="barber.800"
               >
                 NOME DA BARBEARIA:
               </Text>
               <Input
                 width="100%"
-                background="barber.100"
                 placeholder="Nome da sua companhia"
+                _focus={{ bg: "barber.300", color: "barber.700" }}
+                backgroundColor="barber.300"
+                border="2px"
+                borderColor="barber.800"
+                fontWeight="extrabold"
+                fontSize="2xl"
+                fontFamily="inherit"
+                color="barber.800"
                 size="lg"
                 type="Text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
 
               <Text
@@ -73,25 +104,34 @@ export default function Profile() {
                 fontSize="2xl"
                 fontWeight="bold"
                 fontFamily="inherit"
-                color="barber.100"
+                color="barber.800"
               >
                 ENDEREÇO:
               </Text>
               <Input
                 width="100%"
-                background="barber.100"
                 placeholder="Endereço da barbearia"
+                _focus={{ bg: "barber.300", color: "barber.700" }}
+                backgroundColor="barber.300"
+                border="2px"
+                borderColor="barber.800"
+                fontWeight="extrabold"
+                fontSize="2xl"
+                fontFamily="inherit"
+                color="barber.800"
                 size="lg"
                 type="Text"
+                value={endereco}
+                onChange={(e) => setEndereco(e.target.value)}
               />
 
               <Text
                 paddingTop={4}
                 marginBottom={2}
                 fontSize="2xl"
-                fontWeight="medium"
                 fontFamily="inherit"
-                color="barber.100"
+                fontWeight="bold"
+                color="barber.800"
               >
                 PLANO ATUAL:
               </Text>
@@ -99,16 +139,15 @@ export default function Profile() {
               <Flex
                 padding={2}
                 width="100%"
-                border="4px"
-                rounded={10}
-                borderColor="barber.900"
-                backgroundColor="barber.900"
+                rounded={4}
+                backgroundColor="barber.800"
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Text color="green.300" fontSize="2x1" fontWeight="extrabold">
-                  Plano Gratis
+                <Text color="barber.500" fontSize="2x1" fontWeight="extrabold">
+                  Plano{" "}
+                  {userData?.subscriptions?.status ? "Premium" : "Grátis "}
                 </Text>
 
                 <Link href="/planos">
@@ -125,9 +164,28 @@ export default function Profile() {
                 </Link>
               </Flex>
 
-              <Button backgroundColor="button.default"  _hover={{ bg : "green.700"}} marginTop={3} width= "100%" padding={6} textColor="barber.900" > Salvar </Button>
+              <Button
+                backgroundColor="barber.600"
+                _hover={{ bg: "barber.500" }}
+                marginTop={3}
+                width="100%"
+                padding={6}
+                textColor="barber.100"
+              >
+                Salvar
+              </Button>
 
-              <Button backgroundColor="gray.400" _hover={{ bg :"gray.400"}} borderWidth={2} borderColor="barber.400" marginTop={3} width= "100%" textColor="barber.900">  Sair da Conta</Button>
+              <Button
+                backgroundColor="transparent"
+                border="2px"
+                _hover={{ bg: "gray.400" }}
+                marginTop={3}
+                width="100%"
+                textColor="barber.800"
+                onClick={logout}
+              >
+                Sair da Conta
+              </Button>
             </Flex>
           </Flex>
         </Flex>
@@ -135,3 +193,24 @@ export default function Profile() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  try {
+    const apiClient = setupAPIClient(ctx);
+    const response = await getUserData(apiClient);
+
+    return {
+      props: {
+        userData: response,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+});

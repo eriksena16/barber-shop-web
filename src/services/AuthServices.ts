@@ -8,6 +8,7 @@ import {
 import { api } from "@/services/apiClient";
 
 import { GET_USER, LOGIN_USER, POST_USER } from "../routes/routes";
+import { setupAPIClient } from "./api";
 
 export function handleApiResponse<T>(response: { data: ApiResponse<T> }) {
   if (!response.data.success) {
@@ -25,7 +26,8 @@ export async function register(credentials: SignUpProps): Promise<void> {
   await api.post(POST_USER, credentials);
 }
 
-export async function getUserData(): Promise<UserProps>{
-  const response = await api.get(GET_USER);
+
+export async function getUserData(apiClient: ReturnType<typeof setupAPIClient>): Promise<UserProps>{
+  const response = await apiClient.get(GET_USER);
   return handleApiResponse<UserProps>(response);
 }
