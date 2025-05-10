@@ -4,3 +4,10 @@ export const LOGIN_USER = "/api/v1/Auth/login";
 export const POST_USER = "/api/v1/Auth/register";
 export const GET_USER = "/api/v1/Users/user-detail";
 //#endregion
+
+//#region HAIRCUT
+export const GET_CHECK = "/api/v1/Subscriptions/check-subscription";
+export const GET_COUNT = "/api/v1/Haircurts/count";
+export const GET_HAIRCUT_ID = "/api/v1/Haircurts/"
+
+//#endregion

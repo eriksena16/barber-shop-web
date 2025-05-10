@@ -2,9 +2,9 @@ import {
   SignInProps,
   SignUpProps,
   LoginResponse,
-  ApiResponse,
   UserProps,
 } from "@/types/AuthTypes";
+import { handleApiResponse } from "@/utils/ApiResponse";
 import { api } from "@/services/apiClient";
 
 import { GET_USER, LOGIN_USER, POST_USER } from "../routes/routes";

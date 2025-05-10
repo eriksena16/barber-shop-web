@@ -3,6 +3,8 @@ import { useMediaQuery, Flex, Button, Switch, Stack, Heading, Text } from "@chak
 import { SideBar } from "@/components/sidebar";
 import Link from "next/link"
 import { IoMdPricetag } from "react-icons/io";
+import { canSSRAuth } from "@/utils/CanSSRAuth";
+
 
 export default function Haircuts() {
   const [isMobile] = useMediaQuery("(max-width: 500px)")
@@ -74,7 +76,7 @@ export default function Haircuts() {
             justifyContent={"space-between"}
           >
             <Flex mb={isMobile ? 2 : 0} direction={"row"} alignItems={"center"} justifyContent={"center"}>
-              <IoMdPricetag size={28} color="#F2C94C" />
+              <IoMdPricetag size={28} color="#556B2F" />
               <Text fontWeight={"bold"} ml={4}  noOfLines= {2} color={"barber.100"}>Corte Completo</Text>
             </Flex>
             <Flex>
@@ -96,7 +98,7 @@ export default function Haircuts() {
             justifyContent={"space-between"}
           >
             <Flex direction={"row"} alignItems={"center"} justifyContent={"center"}>
-              <IoMdPricetag size={28} color="#F2C94C" />
+              <IoMdPricetag size={28} color="#556B2F" />
               <Text fontWeight={"bold"} ml={4}  noOfLines= {2} color={"barber.100"}>Barba</Text>
             </Flex>
             <Flex>
@@ -108,3 +110,22 @@ export default function Haircuts() {
     </>
   );
 }
+
+// export const getServerSideProps = canSSRAuth(async (ctx) => {
+//   try {
+
+//   } catch (err) {
+//     return {
+//       redirect: {
+//         destination: '/dashboard',
+//         permanent: false,
+//       }
+//     }
+//   }
+// });
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {},
+  };
+});
