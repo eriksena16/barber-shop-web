@@ -2,19 +2,12 @@ import {
   SignInProps,
   SignUpProps,
   LoginResponse,
-  ApiResponse,
   UserProps,
 } from "@/types/AuthTypes";
+import { handleApiResponse } from "@/utils/ApiResponse";
 import { api } from "@/services/apiClient";
 
-import { GET_USER, LOGIN_USER, POST_USER } from "../routes/routes";
-
-export function handleApiResponse<T>(response: { data: ApiResponse<T> }) {
-  if (!response.data.success) {
-    throw new Error(response.data.errors?.join(", ") || "Unknown error");
-  }
-  return response.data.data as T;
-}
+import { GET_USER, LOGIN_USER, POST_USER } from "@/routes/routes";
 
 export async function login(credentials: SignInProps): Promise<LoginResponse> {
   const response = await api.post(LOGIN_USER, credentials);
