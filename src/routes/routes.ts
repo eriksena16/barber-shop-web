@@ -3,6 +3,7 @@
 export const LOGIN_USER = "/api/v1/Auth/login";
 export const POST_USER = "/api/v1/Auth/register";
 export const GET_USER = "/api/v1/Users/user-detail";
+export const UPDATE_USER = "/api/v1/Users/update/"
 //#endregion
 
 //#region HAIRCUT

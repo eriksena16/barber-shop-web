@@ -6,22 +6,35 @@ import { FaUser } from "react-icons/fa";
 import { canSSRAuth } from "@/utils/CanSSRAuth";
 import { useAuth } from "@/hooks/useAuth";
 import { signOut } from "@/context/AuthContext";
-import { getUserData } from "../../services/AuthServices";
+import { getUserData, updateUserData } from "../../services/AuthServices";
 import { useState } from "react";
 import { setupAPIClient } from "@/services/api";
-import { UserProps } from "@/types/AuthTypes";
+import { updateProps, UserProps } from "@/types/AuthTypes";
 
 type ProfileProps ={
   userData: UserProps;
 }
 
 export default function Profile({userData} : ProfileProps) {
-  const { signUp } = useAuth();
 
   const [name, setName] = useState(userData && userData?.name);
   const [endereco, setEndereco] = useState(userData && userData?.address);
   async function logout() {
     signOut();
+  }
+
+  async function updateUser() 
+  {
+    if(name === '') return;
+
+    try{
+      const credentials: updateProps = {id:userData.id  ,name: name, address: endereco};
+      await updateUserData(credentials);
+
+    }catch(err){
+      console.log(err)
+    }
+    
   }
   return (
     <>
@@ -41,7 +54,7 @@ export default function Profile({userData} : ProfileProps) {
             alignItems="center"
             justifyContent="flex-start"
           >
-            <FaUser size={50} color={" #2C3E50"}></FaUser>
+            <FaUser size={50} color={" #B22222"}></FaUser>
             <Heading
               fontSize="4xl"
               fontFamily="inherit"
@@ -49,7 +62,7 @@ export default function Profile({userData} : ProfileProps) {
               marginTop={4}
               marginRight={4}
               marginBottom={4}
-              color={"barber.800"}
+              color={"barber.900"}
             >
               Minha Conta
             </Heading>
@@ -157,7 +170,7 @@ export default function Profile({userData} : ProfileProps) {
                     padding={1.5}
                     rounded={7}
                     fontWeight="bold"
-                    backgroundColor="green.700"
+                    backgroundColor="green.700" 
                   >
                     Mudar de plano
                   </Box>
@@ -171,6 +184,7 @@ export default function Profile({userData} : ProfileProps) {
                 width="100%"
                 padding={6}
                 textColor="barber.100"
+                onClick={updateUser}
               >
                 Salvar
               </Button>
@@ -194,7 +208,7 @@ export default function Profile({userData} : ProfileProps) {
   );
 }
 
-export const getServerSideProps = canSSRAuth(async (ctx) => {
+export const getServerSideProps = canSSRAuth(async (ctx) =>{
   try {
     const apiClient = setupAPIClient(ctx);
     const response = await getUserData(apiClient);
