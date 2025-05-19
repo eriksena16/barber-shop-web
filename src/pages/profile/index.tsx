@@ -54,7 +54,7 @@ export default function Profile({userData} : ProfileProps) {
             alignItems="center"
             justifyContent="flex-start"
           >
-            <FaUser size={50} color={" #B22222"}></FaUser>
+            <FaUser size={50} color={" #2C3E50"}></FaUser>
             <Heading
               fontSize="4xl"
               fontFamily="inherit"
@@ -62,7 +62,7 @@ export default function Profile({userData} : ProfileProps) {
               marginTop={4}
               marginRight={4}
               marginBottom={4}
-              color={"barber.900"}
+              color={"barber.800"}
             >
               Minha Conta
             </Heading>

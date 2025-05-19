@@ -109,20 +109,19 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
               type="text"
               w={"85%"}
               mb={4}
-<<<<<<< HEAD
-              bg={"gray.900"}
+              bg="barber.600"
               value={price}
               onChange={(e) => priceName(e.target.value)}
             />
             <Button
               onClick={handleRegister}
-              background={"button.cta"}
+              background={"button.default"}
               color={"barber.100"}
               w={"85%"}
               size={"lg"}
               alignItems={"center"}
               justifyContent={"center"}
-              _hover={{ bg: "#4E342E" }}
+              _hover={{ bg: " #B22222" }}
               mb={6}
               disabled={!subscription && count >= 3}
             >
@@ -139,20 +138,6 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
               </Flex>
             )}
 
-=======
-              bg="barber.600"
-            />
-             <Button
-                background={"button.cta"}
-                color={"barber.100"}
-                w={"85%"}
-                size={"lg"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                _hover={{ bg: "#4E342E" }}
-                mb={6}
-              >Cadastrar</Button>
->>>>>>> 470a0414748c122b2ecd5f8da1a30dd0e85d18e2
           </Flex>
         </Flex>
       </SideBar>

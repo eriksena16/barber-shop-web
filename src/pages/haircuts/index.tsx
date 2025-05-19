@@ -111,19 +111,6 @@ export default function Haircuts() {
   );
 }
 
-// export const getServerSideProps = canSSRAuth(async (ctx) => {
-//   try {
-
-//   } catch (err) {
-//     return {
-//       redirect: {
-//         destination: '/dashboard',
-//         permanent: false,
-//       }
-//     }
-//   }
-// });
-
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   return {
     props: {},
