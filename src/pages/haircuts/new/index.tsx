@@ -42,7 +42,8 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
           alignItems={"flex-start"}
           justifyContent={"flex-start"}
         >
-          <Flex direction={isMobile ? "column" : "row"}
+          <Flex
+            direction={isMobile ? "column" : "row"}
             w={"100%"}
             align={isMobile ? "flex-start" : "center"}
             mb={isMobile ? 4 : 0}
@@ -50,15 +51,15 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
             <Link href={"/haircuts"}>
               <Button
                 background={"button.cta"}
-                color={"barber.100"}
+                color={"barber.800"}
                 p={4}
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"center"}
-                _hover={{ bg: "#4E342E" }}
+                _hover={{ bg: " #2C3E50", color: " #F5EEE2" }}
                 mr={4}
               >
-                <FiChevronLeft size={24} color={"barber.50"} />
+                <FiChevronLeft size={24} color={"barber.100"} />
                 Voltar
               </Button>
             </Link>
@@ -67,14 +68,15 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
               mt={4}
               mb={4}
               mr={4}
-              color={"barber.50"}
+              color={"barber.800"}
             >
               Modelos de Corte
             </Heading>
           </Flex>
           <Flex
             maxW={"700px"}
-            bg={"barber.900"}
+            bg={"barber.800"}
+            rounded={5}
             w={"100%"}
             alignItems={"center"}
             justify={"center"}
@@ -83,14 +85,20 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
             direction={"column"}
             borderRadius={10}
           >
-            <Heading fontSize={isMobile ? "22px" : "3xl"} mb={4} color={"barber.100"}>Modelos de Corte</Heading>
+            <Heading
+              fontSize={isMobile ? "22px" : "3xl"}
+              mb={4}
+              color={"barber.100"}
+            >
+              Modelos de Corte
+            </Heading>
 
             <Input
               placeholder="Nome do Corte"
               size={"lg"}
               type="text"
               w={"85%"}
-              bg={"gray.900"}
+              bg="barber.600"
               mb={4}
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -101,6 +109,7 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
               type="text"
               w={"85%"}
               mb={4}
+<<<<<<< HEAD
               bg={"gray.900"}
               value={price}
               onChange={(e) => priceName(e.target.value)}
@@ -130,6 +139,20 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
               </Flex>
             )}
 
+=======
+              bg="barber.600"
+            />
+             <Button
+                background={"button.cta"}
+                color={"barber.100"}
+                w={"85%"}
+                size={"lg"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                _hover={{ bg: "#4E342E" }}
+                mb={6}
+              >Cadastrar</Button>
+>>>>>>> 470a0414748c122b2ecd5f8da1a30dd0e85d18e2
           </Flex>
         </Flex>
       </SideBar>

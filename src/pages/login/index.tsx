@@ -26,7 +26,7 @@ export default function Login() {
         <title>BarberShop - Faca login para acessar</title>
       </Head>
       <Flex
-        background={"barber.900"}
+        background={"barber.800"}
         height={"100vh"}
         align={"center"}
         justifyContent={"center"}
@@ -43,35 +43,43 @@ export default function Login() {
           </Center>
 
           <Input
-            background={"barber.100"}
+            background={"barber.300"}
             variant={"filled"}
             size={"lg"}
             placeholder="email@email.com"
             type="email"
             mb={3}
             mt={3}
-            _placeholder={{ color: "button.cta" }}
+            _placeholder={{}}
+            fontFamily="mono"
+            fontWeight="bold"
+            textColor="barber.200"
+            _focus={{ background: "barber.100" }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
-            background={"barber.100"}
+            background={"barber.300"}
             variant={"filled"}
             size={"lg"}
-            placeholder="*********"
+            placeholder="***************"
             type="password"
-            mb={6}
-            _placeholder={{ color: "barber.50" }}
+            mb={3}
+              _placeholder={{}}
+            fontFamily="mono"
+            fontWeight="bold"
+            textColor="barber.200"
+            _focus={{ background: "barber.100" }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
-            background={"button.cta"}
+            background={"button.danger"}
             mb={6}
-            color={"button.default"}
+            color={"button.cta"}
             size={"lg"}
-            _hover={{ bg: "#4E342E" }}
+            _hover={{ bg: "#F2C94C", textColor:  "#2C3E50"}}
             onClick={handleLogin}
           >
             Acessar

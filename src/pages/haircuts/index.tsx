@@ -31,17 +31,17 @@ export default function Haircuts() {
               mt={4}
               mb={4}
               mr={4}
-              color={"barber.50"}
+              color={"barber.800"}
             >
               Modelos de Cortes
             </Heading>
 
             <Link href={"/haircuts/new"}>
               <Button
-                background={"button.cta"}
+                background={"barber.800"}
                 color={"barber.100"}
                 size={"lg"}
-                _hover={{ bg: "#4E342E" }}>
+                _hover={{ bg: "#B22222" }}>
                 Cadastrar novo
               </Button>
             </Link>
@@ -50,7 +50,7 @@ export default function Haircuts() {
 
               <Text
                 fontWeight={"bold"}
-                textColor={"barber.50"}
+                textColor={"barber.800"}
               >
                 ATIVOS
               </Text>
@@ -68,7 +68,7 @@ export default function Haircuts() {
             cursor={"pointer"}
             w={"100%"}
             p={4}
-            bg={"barber.900"}
+            bg={"barber.800"}
             direction={isMobile ? "column" : "row"}
             alignItems={isMobile ? "flex-start" : "center"}
             rounded={"4"}
@@ -77,7 +77,7 @@ export default function Haircuts() {
           >
             <Flex mb={isMobile ? 2 : 0} direction={"row"} alignItems={"center"} justifyContent={"center"}>
               <IoMdPricetag size={28} color="#556B2F" />
-              <Text fontWeight={"bold"} ml={4} noOfLines={2} color={"barber.100"}>Corte Completo</Text>
+              <Text fontWeight={"bold"} ml={4}  noOfLines= {2} color={"barber.100"}>Corte Completo</Text>
             </Flex>
             <Flex>
               <Text fontWeight={"bold"} color={"barber.100"}>Price: R$ 59.90</Text>
@@ -90,7 +90,7 @@ export default function Haircuts() {
             cursor={"pointer"}
             w={"100%"}
             p={4}
-            bg={"barber.900"}
+            bg={"barber.800"}
             direction={isMobile ? "column" : "row"}
             alignItems={isMobile ? "flex-start" : "center"}
             rounded={"4"}
@@ -99,7 +99,7 @@ export default function Haircuts() {
           >
             <Flex direction={"row"} alignItems={"center"} justifyContent={"center"}>
               <IoMdPricetag size={28} color="#556B2F" />
-              <Text fontWeight={"bold"} ml={4} noOfLines={2} color={"barber.100"}>Barba</Text>
+              <Text fontWeight={"bold"} ml={4}  noOfLines= {2} color={"barber.100"}>Barba</Text>
             </Flex>
             <Flex>
               <Text fontWeight={"bold"} color={"barber.100"}>Price: R$ 59.90</Text>

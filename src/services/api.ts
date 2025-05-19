@@ -4,9 +4,8 @@ import https from 'https';
 import { AuthTokenError } from "./errors/AuthTokenError";
 import { signOut } from "@/context/AuthContext";
 
-
 export function setupAPIClient(ctx = undefined) {
-    let cookies = parseCookies(ctx);
+  let cookies = parseCookies(ctx);
 
  const isDev = process.env.NODE_ENV !== 'production';
 
@@ -30,9 +29,9 @@ export function setupAPIClient(ctx = undefined) {
             }
         }
 
-        return Promise.reject(error);
-    })
+      return Promise.reject(error);
+    }
+  );
 
-    return api;
-
+  return api;
 }
