@@ -4,11 +4,32 @@ import { SideBar } from "@/components/sidebar";
 import Link from "next/link"
 import { FiChevronLeft } from "react-icons/fi";
 import { canSSRAuth } from "@/utils/CanSSRAuth";
-import { Check, Count } from "@/services/HairCutService";
-import { NewHaircutProps } from "@/types/HairCutTypes"
+import { Check, Count, CreateHaircut } from "@/services/HairCutService";
+import { ValidationHaircutProps, NewHaircutProps, } from "@/types/HairCutTypes"
+import { useState } from "react";
+import Router from 'next/router';
 
-export default function NewHaircut({ subscription, count }: NewHaircutProps) {
-  const [isMobile] = useMediaQuery("(max-width: 500px)")
+export default function NewHaircut({ subscription, count }: ValidationHaircutProps) {
+  const [isMobile] = useMediaQuery("(max-width: 500px)");
+  const [name, setName] = useState('');
+  const [price, priceName] = useState('');
+
+  async function handleRegister() {
+    if (name === '' || price === '') {
+      alert('Preencha todos os campos!');
+      return;
+    }
+
+    try {
+
+      await CreateHaircut({ name: name, price: price });
+      Router.push('/haircuts')
+
+    } catch (err) {
+      console.log(err);
+      alert("Erro ao cadastrar esse modelo.");
+    }
+  }
 
   return (
     <>
@@ -60,7 +81,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
             pt={8}
             pb={8}
             direction={"column"}
-             borderRadius={10}
+            borderRadius={10}
           >
             <Heading fontSize={isMobile ? "22px" : "3xl"} mb={4} color={"barber.100"}>Modelos de Corte</Heading>
 
@@ -71,6 +92,8 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
               w={"85%"}
               bg={"gray.900"}
               mb={4}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <Input
               placeholder="Valor do corte ex: 59.90"
@@ -79,8 +102,11 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
               w={"85%"}
               mb={4}
               bg={"gray.900"}
+              value={price}
+              onChange={(e) => priceName(e.target.value)}
             />
             <Button
+              onClick={handleRegister}
               background={"button.cta"}
               color={"barber.100"}
               w={"85%"}
@@ -98,7 +124,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
                 <Text>Voce atingiu seu limite de corte.</Text>
                 <Link href={"/planos"}>
                   <Text fontWeight={"bold"} color={"#31FB6A"} cursor={"pointer"} ml={1}>
-                     Seja premium
+                    Seja premium
                   </Text>
                 </Link>
               </Flex>
@@ -115,8 +141,6 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   try {
     const response = await Check(ctx);
-    // console.log(response[0].status);
-    //     console.log("Parou aqui");
     const count = await Count(ctx);
 
     return {
