@@ -5,11 +5,16 @@ export interface CheckResponse {
     userId: string;
 }
 
-export interface HaircutProps {
+export interface HaircutItemProps {
+    name: string;
     id: string;
     status: boolean;
-    priceId: string;
+    price: string;
     userId: string;
+}
+
+export interface HaircutsProps {
+    haircuts: HaircutItemProps[];
 }
 
 export interface ValidationHaircutProps{

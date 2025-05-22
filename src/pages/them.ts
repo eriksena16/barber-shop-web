@@ -35,6 +35,7 @@ const colors = {
     300: " #E8DED1",
     200: " #4E342E",
     100: " #F5EEE2",
+    50:  " #9E8E7C",
   },
   button: {
     cta: " #F5EEE2",

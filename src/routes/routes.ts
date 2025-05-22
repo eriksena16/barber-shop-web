@@ -11,5 +11,6 @@ export const GET_CHECK = "/api/v1/Subscriptions/check-subscription";
 export const GET_COUNT = "/api/v1/Haircurts/count";
 export const GET_HAIRCUT_ID = "/api/v1/Haircurts/"
 export const POST_HAIRCUT = "/api/v1/Haircurts/"
+export const GET_HAIRCUT = "/api/v1/Haircurts/AllHaircut"
 
 //#endregion

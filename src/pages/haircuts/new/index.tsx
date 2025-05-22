@@ -95,21 +95,29 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
 
             <Input
               placeholder="Nome do Corte"
+              _placeholder={{ color: "barber.50" }}
               size={"lg"}
               type="text"
               w={"85%"}
-              bg="barber.600"
+              bg="barber.300"
               mb={4}
               value={name}
+              fontFamily="mono"
+              fontWeight="bold"
+              textColor="barber.600"
               onChange={(e) => setName(e.target.value)}
             />
             <Input
               placeholder="Valor do corte ex: 59.90"
+            _placeholder={{ color: "barber.50" }}
               size={"lg"}
               type="text"
               w={"85%"}
               mb={4}
-              bg="barber.600"
+              bg="barber.300"
+              fontFamily="mono"
+              fontWeight="bold"
+              textColor="barber.600"
               value={price}
               onChange={(e) => priceName(e.target.value)}
             />
