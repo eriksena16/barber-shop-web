@@ -70,7 +70,7 @@ export default function Profile({userData} : ProfileProps) {
 
           <Flex
             maxWidth="700px"
-            background="barber.100"
+            background="barber.800"
             border="4px"
             borderColor="barber.800"
             width="100%"
@@ -90,7 +90,7 @@ export default function Profile({userData} : ProfileProps) {
                 fontSize="2xl"
                 fontWeight="bold"
                 fontFamily="inherit"
-                color="barber.800"
+                color="barber.100"
               >
                 NOME DA BARBEARIA:
               </Text>
@@ -117,7 +117,7 @@ export default function Profile({userData} : ProfileProps) {
                 fontSize="2xl"
                 fontWeight="bold"
                 fontFamily="inherit"
-                color="barber.800"
+                color="barber.100"
               >
                 ENDEREÇO:
               </Text>
@@ -144,7 +144,7 @@ export default function Profile({userData} : ProfileProps) {
                 fontSize="2xl"
                 fontFamily="inherit"
                 fontWeight="bold"
-                color="barber.800"
+                color="barber.100"
               >
                 PLANO ATUAL:
               </Text>
@@ -153,12 +153,13 @@ export default function Profile({userData} : ProfileProps) {
                 padding={2}
                 width="100%"
                 rounded={4}
-                backgroundColor="barber.800"
+                border="4px"
+                borderColor="barber.600"
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Text color="barber.500" fontSize="2x1" fontWeight="extrabold">
+                <Text color="barber.500" fontSize="2x1" p="1" rounded={2} backgroundColor= "barber.600" fontWeight="extrabold">
                   Plano{" "}
                   {userData?.subscriptions?.status ? "Premium" : "Grátis "}
                 </Text>
@@ -170,7 +171,7 @@ export default function Profile({userData} : ProfileProps) {
                     padding={1.5}
                     rounded={7}
                     fontWeight="bold"
-                    backgroundColor="green.700" 
+                    backgroundColor="green.700"
                   >
                     Mudar de plano
                   </Box>
@@ -195,7 +196,7 @@ export default function Profile({userData} : ProfileProps) {
                 _hover={{ bg: "gray.400" }}
                 marginTop={3}
                 width="100%"
-                textColor="barber.800"
+                textColor="gray.200"
                 onClick={logout}
               >
                 Sair da Conta
