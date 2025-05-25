@@ -22,8 +22,7 @@ import {
   NavItemProps,
   MobileProps,
 } from "@/types/SideBarTypes";
-import { p } from "framer-motion/client";
-import { link } from "fs";
+
 
 const LinkItems: Array<LinkItemProps> = [
   { name: "Agenda", icon: FiClipboard, route: "/dashboard" },
