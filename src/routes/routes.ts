@@ -14,3 +14,6 @@ export const POST_HAIRCUT = "/api/v1/Haircurts/"
 export const GET_HAIRCUT = "/api/v1/Haircurts/AllHaircut"
 
 //#endregion
+
+//#region SERVICES
+export const POST_SERVICE = "/api/v1/Services";

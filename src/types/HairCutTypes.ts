@@ -9,7 +9,7 @@ export interface HaircutItemProps {
     name: string;
     id: string;
     status: boolean;
-    price: string;
+    price: string | number;
     userId: string;
 }
 

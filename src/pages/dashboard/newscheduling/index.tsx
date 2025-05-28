@@ -1,12 +1,45 @@
 import{useState, ChangeEvent} from "react"
 import Head from "next/head";
 import { SideBar } from "@/components/sidebar";
+import {canSSRAuth} from "../../../utils/CanSSRAuth"
 
 import { Flex, Heading, Text, Button, Input, Select} from "@chakra-ui/react";
+import { setupAPIClient } from "@/services/api";
+import { GET_HAIRCUT, POST_SERVICE } from "@/routes/routes";
+import { HaircutItemProps } from "../../../types/HairCutTypes";
+import {useRouter} from "next/router"
 
-export default function Newscheduling() {
+interface NewProps{
+  haircuts : HaircutItemProps[];
+}
 
-    const[costumer, setCostumer] = useState('')
+export default function Newscheduling({ haircuts }: NewProps) {
+  const [costumer, setCostumer] = useState("");
+  const [selectedHaircut, setSelectedHaircut] = useState(haircuts[0]);
+  const router = useRouter();
+
+  function handleChangeSelect(id: string){
+    const haircutItem = haircuts.find(item => item.id === id);
+    
+    setSelectedHaircut(haircutItem);
+  }
+
+  async function handleRegister() {
+    try{
+    const apiClient = setupAPIClient();
+    await apiClient.post(POST_SERVICE, {
+      customer: costumer,
+      haircutId: selectedHaircut?.id,
+      userId: selectedHaircut?.userId,
+    });
+
+    router.push("/dashboard")
+
+    }catch(err){
+      console.log(err);
+      alert("Erro ao Registrar");
+    }
+  }
 
   return (
     <>
@@ -48,9 +81,11 @@ export default function Newscheduling() {
               marginBottom={4}
               size="lg"
               type="text"
-              background="barber.100" 
+              background="barber.100"
               value={costumer}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setCostumer(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setCostumer(e.target.value)
+              }
             ></Input>
 
             <Select
@@ -60,10 +95,13 @@ export default function Newscheduling() {
               fontWeight="bold"
               textColor="barber.700"
               background="barber.100"
+              onChange={(e) => handleChangeSelect(e.target.value)}
             >
-              <option color="white" key={1} value="barba completa">
-                Barba Completa
-              </option>
+              {haircuts?.map((item) => (
+                <option color="white" key={item?.id} value={item?.id}>
+                  {item?.name}
+                </option>
+              ))}
             </Select>
 
             <Button
@@ -72,6 +110,7 @@ export default function Newscheduling() {
               color="barber.100"
               bg="button.default"
               _hover={{ bg: "#F2C94C" }}
+              onClick={handleRegister}
             >
               Cadastrar
             </Button>
@@ -81,3 +120,42 @@ export default function Newscheduling() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) =>{
+
+  try{
+    const apiClient = setupAPIClient(ctx);
+    const response = await apiClient.get(GET_HAIRCUT,{
+      params:{
+        status : true, 
+      }
+    })
+
+    if(response.data == null){
+      return{
+        redirect: {
+          destination: "/dashboard",
+          permanent: false
+        }
+      }  
+    }
+
+    console.log(response.data)
+
+    return {
+      props: {
+        haircuts: response.data.data
+      },
+    };
+
+  }catch(err){
+    console.log(err)
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    }; 
+  }
+
+} )
