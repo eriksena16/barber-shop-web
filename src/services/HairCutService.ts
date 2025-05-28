@@ -23,15 +23,18 @@ export async function CreateHaircut(newHaircut: NewHaircutProps): Promise<Haircu
   return handleApiResponse<HaircutItemProps>(response);
 }
 
-export async function ListHaircut(ctx: any): Promise<HaircutItemProps[]> {
+export async function ListHaircut(status: boolean, ctx?: any): Promise<HaircutItemProps[]> {
   const api = setupAPIClient(ctx);
   const response = await api.get(GET_HAIRCUT, {
     params: {
-      status: true,
+      status: status,
     }
   });
   return handleApiResponse<HaircutItemProps[]>(response);
 }
+
+
+
 // export async function getUserData(): Promise<UserProps>{
 //   const response = await api.get(GET_USER);
 //   return handleApiResponse<UserProps>(response);

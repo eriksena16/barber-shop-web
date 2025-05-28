@@ -5,12 +5,28 @@ import Link from "next/link"
 import { IoMdPricetag } from "react-icons/io";
 import { canSSRAuth } from "@/utils/CanSSRAuth";
 import { ListHaircut } from "@/services/HairCutService";
-import { HaircutsProps, HaircutItemProps} from "@/types/HairCutTypes";
-import { useState } from "react";
+import { HaircutsProps, HaircutItemProps } from "@/types/HairCutTypes";
+import { ChangeEvent, useState } from "react";
 
 export default function Haircuts({ haircuts }: HaircutsProps) {
   const [isMobile] = useMediaQuery("(max-width: 500px)");
   const [haircutList, setHaircutList] = useState<HaircutItemProps[]>(haircuts || []);
+  const [disableHairCut, setDisableHaircut] = useState("enabled");
+
+  async function handleDisable(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.value === 'disabled') {
+      setDisableHaircut("enabled")
+
+      const response = await ListHaircut(true);
+      setHaircutList(response);
+
+    } else {
+      setDisableHaircut("disabled")
+
+       const response = await ListHaircut(false);
+      setHaircutList(response);
+    }
+  }
 
   return (
     <>
@@ -62,12 +78,16 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
               <Switch
                 colorScheme="green"
                 size={"lg"}
+                value={disableHairCut}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleDisable(e)}
+                isChecked={disableHairCut === 'disabled' ? false : true}
               />
             </Stack>
           </Flex>
-         
+
         </Flex>
- {haircutList.map(haircut => (
+        {
+          haircutList.map(haircut => (
             <Link key={haircut.id} href={`/haircuts/${haircut.id}`}>
               <Flex
                 cursor={"pointer"}
@@ -98,7 +118,7 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   try {
-    const response = await ListHaircut(ctx);
+    const response = await ListHaircut(true, ctx);
     console.log(response);
     return {
       props: {
