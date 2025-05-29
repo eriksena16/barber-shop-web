@@ -17,9 +17,14 @@ export interface HaircutsProps {
     haircuts: HaircutItemProps[];
 }
 
-export interface ValidationHaircutProps{
+export interface ValidationNewHaircutProps{
     subscription: boolean;
     count: number;
+}
+
+export interface ValidationEditHaircutProps{
+    subscription: boolean;
+    haircut: HaircutItemProps;
 }
 
 

@@ -13,7 +13,7 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
   const [haircutList, setHaircutList] = useState<HaircutItemProps[]>(haircuts || []);
   const [disableHairCut, setDisableHaircut] = useState("enabled");
 
-  async function handleDisable(e: ChangeEvent<HTMLInputElement>) {
+  async function handleD(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.value === 'disabled') {
       setDisableHaircut("enabled")
 

@@ -5,11 +5,11 @@ import Link from "next/link"
 import { FiChevronLeft } from "react-icons/fi";
 import { canSSRAuth } from "@/utils/CanSSRAuth";
 import { Check, Count, CreateHaircut } from "@/services/HairCutService";
-import { ValidationHaircutProps, NewHaircutProps, } from "@/types/HairCutTypes"
+import { ValidationNewHaircutProps, NewHaircutProps, } from "@/types/HairCutTypes"
 import { useState } from "react";
 import Router from 'next/router';
 
-export default function NewHaircut({ subscription, count }: ValidationHaircutProps) {
+export default function NewHaircut({ subscription, count }: ValidationNewHaircutProps) {
   const [isMobile] = useMediaQuery("(max-width: 500px)");
   const [name, setName] = useState('');
   const [price, priceName] = useState('');
@@ -56,7 +56,7 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"center"}
-                _hover={{ bg: " #2C3E50", color: " #F5EEE2" }}
+                _hover={{ bg: "barber.800", color: "barber.100" }}
                 mr={4}
               >
                 <FiChevronLeft size={24} color={"barber.100"} />
@@ -129,7 +129,7 @@ export default function NewHaircut({ subscription, count }: ValidationHaircutPro
               size={"lg"}
               alignItems={"center"}
               justifyContent={"center"}
-              _hover={{ bg: " #B22222" }}
+              _hover={{ bg: "barber.900" }}
               mb={6}
               disabled={!subscription && count >= 3}
             >
