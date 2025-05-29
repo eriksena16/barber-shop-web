@@ -97,18 +97,16 @@ export default function Profile({userData} : ProfileProps) {
               <Input
                 width="100%"
                 placeholder="Nome da sua companhia"
-                _focus={{ bg: "barber.300", color: "barber.700" }}
-                backgroundColor="barber.300"
-                border="2px"
-                borderColor="barber.800"
-                fontWeight="extrabold"
-                fontSize="2xl"
-                fontFamily="inherit"
-                color="barber.800"
-                size="lg"
-                type="Text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+               _placeholder={{ color: "barber.50" }}
+              size={"lg"}
+              type="text"
+              bg="barber.300"
+              mb={4}
+              value={name}
+              fontFamily="mono"
+              fontWeight="bold"
+              textColor="barber.600"
+              onChange={(e) => setName(e.target.value)}
               />
 
               <Text
@@ -124,18 +122,16 @@ export default function Profile({userData} : ProfileProps) {
               <Input
                 width="100%"
                 placeholder="Endereço da barbearia"
-                _focus={{ bg: "barber.300", color: "barber.700" }}
-                backgroundColor="barber.300"
-                border="2px"
-                borderColor="barber.800"
-                fontWeight="extrabold"
-                fontSize="2xl"
-                fontFamily="inherit"
-                color="barber.800"
-                size="lg"
-                type="Text"
-                value={endereco}
-                onChange={(e) => setEndereco(e.target.value)}
+                   _placeholder={{ color: "barber.50" }}
+              size={"lg"}
+              type="text"
+              bg="barber.300"
+              mb={4}
+              value={endereco}
+              fontFamily="mono"
+              fontWeight="bold"
+              textColor="barber.600"
+              onChange={(e) => setEndereco(e.target.value)}
               />
 
               <Text
@@ -180,7 +176,7 @@ export default function Profile({userData} : ProfileProps) {
 
               <Button
                 backgroundColor="barber.600"
-                _hover={{ bg: "barber.500" }}
+                _hover={{ bg: "barber.900" }}
                 marginTop={3}
                 width="100%"
                 padding={6}
