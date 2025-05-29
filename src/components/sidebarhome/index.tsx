@@ -68,7 +68,6 @@ export default function TopNavBar() {
       zIndex={100}
     >
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        {/* Logo */}
         <Flex alignItems="center">
           <Text
             fontSize="2xl"
