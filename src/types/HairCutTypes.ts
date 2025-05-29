@@ -30,5 +30,5 @@ export interface ValidationEditHaircutProps{
 
 export interface NewHaircutProps{
     name: string;
-    price: string;
+    price: number;
 }

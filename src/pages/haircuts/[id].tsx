@@ -4,7 +4,7 @@ import { SideBar } from "@/components/sidebar";
 import Link from "next/link"
 import { FiChevronLeft } from "react-icons/fi";
 import { canSSRAuth } from "@/utils/CanSSRAuth";
-import { Check, Count, CreateHaircut, GetHaircut } from "@/services/HairCutService";
+import { Check, Count, UpdateHaircut, GetHaircut } from "@/services/HairCutService";
 import { ValidationEditHaircutProps, NewHaircutProps, } from "@/types/HairCutTypes"
 import { ChangeEvent, useState } from "react";
 import Router from 'next/router';
@@ -14,7 +14,7 @@ export default function EditHaircut({ subscription, haircut }: ValidationEditHai
     const [name, setName] = useState(haircut?.name);
     const [price, priceName] = useState(haircut?.price);
     const [status, setStatus] = useState(haircut?.status);
-console.log(haircut?.status);
+    console.log(haircut?.status);
     const [disableHairCut, setDisableHaircut] = useState(haircut?.status ? "disabled" : "enabled");
 
     async function handleChangeStatus(e: ChangeEvent<HTMLInputElement>) {
@@ -23,18 +23,21 @@ console.log(haircut?.status);
             setStatus(false)
         } else {
             setDisableHaircut("disabled")
-             setStatus(true)
+            setStatus(true)
         }
     }
-    async function handleRegister() {
+    async function handleUpdate() {
         if (name === '' || price === '') {
             alert('Preencha todos os campos!');
             return;
         }
 
         try {
+     
+            await UpdateHaircut({name, id: haircut.id, status, price: Number(price), userId: haircut.userId });
 
-            // await CreateHaircut({ name: name, price: price });
+            alert("Corte atualizado com sucesso!")
+
             Router.push('/haircuts')
 
         } catch (err) {
@@ -145,7 +148,7 @@ console.log(haircut?.status);
                             </Stack>
                         </Flex>
                         <Button
-                            onClick={handleRegister}
+                            onClick={handleUpdate}
                             background={"button.default"}
                             color={"barber.100"}
                             w={"85%"}

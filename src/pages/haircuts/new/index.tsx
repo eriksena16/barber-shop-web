@@ -22,7 +22,7 @@ export default function NewHaircut({ subscription, count }: ValidationNewHaircut
 
     try {
 
-      await CreateHaircut({ name: name, price: price });
+      await CreateHaircut({ name: name, price: Number(price) });
       Router.push('/haircuts')
 
     } catch (err) {
