@@ -11,8 +11,11 @@ export const GET_CHECK = "/api/v1/Subscriptions/check-subscription";
 export const GET_COUNT = "/api/v1/Haircurts/count";
 export const BASE_URL_HAIRCUT = "/api/v1/Haircurts/"
 export const GET_HAIRCUT = "/api/v1/Haircurts/AllHaircut"
-
 //#endregion
+
+//#region Services
+export const GET_SCHEDULE = "/api/v1/Services/schedules";
+export const FINISH_SCHEDULE = "/api/v1/Services/Finish";
 
 //#region SERVICES
 export const POST_SERVICE = "/api/v1/Services";

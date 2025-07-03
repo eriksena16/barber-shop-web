@@ -25,6 +25,12 @@ export default function Newscheduling({ haircuts }: NewProps) {
   }
 
   async function handleRegister() {
+
+    if(costumer == ''){
+      alert("Preencha o nome do cliente");
+      return;
+    }
+    
     try{
     const apiClient = setupAPIClient();
     await apiClient.post(POST_SERVICE, {
