@@ -48,6 +48,16 @@ const colors = {
   },
 };
 
+const styles = {
+  global:{
+    body:{
+      color: "barber.100"
+    },
+    a:{
+      color: " #FFF"
+    }
+  }
+}
 // const colors2 = {
 //     barber: {
 //         900 : {value : " #333333"},
@@ -66,6 +76,6 @@ const colors = {
 //     }
 // }
 
-const theme = extendTheme({ colors })
+const theme = extendTheme({ colors, styles })
 
 export default theme
